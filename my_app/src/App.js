@@ -7,47 +7,48 @@ import Breakfast from './components/Breakfast';
 import { MenuItems } from './components/MenuItems';
 import { MenuData } from './components/MenuData';
 import Lunch from './components/Lunch';
+import ItemDetails from './components/ItemDetails';
 import Dinner from './components/Dinner';
 import { Route, BrowserRouter, Switch,Link } from "react-router-dom";
 
 
 function App() {
-    // const [state, setState] = useState("");
+    const [state, setState] = useState("");
 
-    // useEffect(() => {
-    //     getToken();
-    // }, [])
+    useEffect(() => {
+        getToken();
+    }, [])
 
-    // useEffect(() => {
-    //     getCategory();
-    // }, [state])
+    useEffect(() => {
+        getCategory();
+    }, [state])
 
-    // const getToken = async () => {
-    //     axios.post("https://demo-api.nasj.io/token/O72Ebw1ro3")
-    //         .then(res => {
-    //             setState(res.data.token);
-    //         })
-    //         .catch(err => {
-    //             console.log("error:")
-    //         })
+    const getToken = async () => {
+        axios.post("https://demo-api.nasj.io/token/O72Ebw1ro3")
+            .then(res => {
+                setState(res.data.token);
+            })
+            .catch(err => {
+                console.log("error:")
+            })
 
-    // }
+    }
 
-    // const getCategory = async () => {
-    //     axios.get('https://demo-api.nasj.io/categories', {
-    //         headers: {
-    //             'x-auth-token': `${state}`,
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //         .then((res) => {
-    //             console.log(res.data.data)
-    //         })
-    //         .catch((error) => {
-    //             console.error(error)
-    //         })
-    // }
+    const getCategory = async () => {
+        axios.get('https://demo-api.nasj.io/categories', {
+            headers: {
+                'x-auth-token': `${state}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
+                console.log(res.data.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
 
     return (
         <BrowserRouter>
@@ -64,6 +65,9 @@ function App() {
                    </Route>
                    <Route path="/dinner">
                        <Dinner/>
+                   </Route>
+                   <Route path="itemdetails/:id">
+                       <ItemDetails/>
                    </Route>
                 </Switch>
             </div>

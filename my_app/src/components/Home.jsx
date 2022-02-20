@@ -1,12 +1,48 @@
 import React from "react";
-import { Redirect, Route, Link } from "react-router-dom";
-import Breakfast from "./Breakfast";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios"
 
 const Home = () => {
+    const [text, setText] = useState("");
+    const [token, setToken] = useState("");
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        getToken();
+    }, [])
 
-    
+    useEffect(() => {
+        getCategory();
+    }, [token])
+    const getToken = async () => {
+        axios.post("https://demo-api.nasj.io/token/O72Ebw1ro3")
+            .then(res => {
+                setToken(res.data.token);
+            })
+            .catch(err => {
+                console.log("error:")
+            })
 
-    return (
+    }
+
+    const getCategory = async () => {
+        axios.get(`https://demo-api.nasj.io/menus?category_id=610adfb94ade7f3fcac26e1a&name=${text}`, {
+            headers: {
+                'x-auth-token': `${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => {
+                setData(res.data.data);
+                console.log(res.data.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+
+    return text.length === 0 ? (
         <div>
             <div className="box-content  h-66 w-100% p-4 pb-8  ... bg-red-900 rounded-b-3xl">
                 <p className="text-gray-200 text-sm font-sans,gilmar leading-loose pt-7 text-left   font-medium">Welcome to</p>
@@ -21,6 +57,7 @@ const Home = () => {
                             placeholder="Search for the food item."
                             type="text"
                             name="sear"
+                            onChange={(e) => { setText(e.target.value) }}
                         />
                     </div>
                 </div>
@@ -63,7 +100,16 @@ const Home = () => {
             </div>
 
         </div>
-    );
+    ) : (<div>
+        {
+            //console.log(data)
+            data.items.map(e=><div>
+                <img src={e.image} alt={e.name}/>
+                <div>{e.name}</div>
+                <div>{e.price}</div>
+            </div>)
+        }
+    </div>)
 }
 
 export default Home

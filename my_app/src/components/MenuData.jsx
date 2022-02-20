@@ -15,7 +15,7 @@ export const MenuData = ({ categoryData }) => {
                       src={e.image}
                       alt="MenuData"
                     />
-                    <div className="w-96 mx-auto mt-2 flex  text-lg font-semibold text-gray-600 mb-16">
+                    <div className="w-96 mx-auto mt-2 flex  text-lg font-semibold text-gray-600 mb-13">
                       <img className="w-5 h-5 mt-1" src="https://www.indiafilings.com/learn/wp-content/uploads/2016/01/Veg-Symbol.jpg"/>
                       <p className="ml-2 w-56 text-left h-16 ">{e.name}</p>
                       <div className=" w-26 h-16 ml-16">Rs. {e.price}</div>

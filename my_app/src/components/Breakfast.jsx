@@ -123,8 +123,11 @@ const Breakfast = () => {
                 {/* <MenuData categoryData={categoryData}></MenuData> */}
             </div>
             <hr className="ml-4 w-96" />
+            
             <div className="text-lg ml-6 text-bold decoration-8 mt-2 text-left text-gray-900">Our Simply south Variations</div>
-            <hr className="ml-4 w-96 mt-2 mb-2" />
+            <hr className="ml-4 w-96 mt-2 mb-1" />
+            <div className=" text-left  w-96 pt-1 pb-1 pl-6 text-lg hover:underline drop-shadow-md...">Breakfast vada varieties</div>
+            <button className=" text-left  w-96 pl-2 text-lg hover:underline drop-shadow-md...">Tiffen Items</button>
             {/* {data[0]._id} 
              */}
 
